@@ -27,11 +27,17 @@ function titleClickHandler(event){
     /* [DONE] get 'href' attribute from the clicked link */
 
     const articleSelector = clickedElement.getAttribute('href');
-    console.log('Clicked article link: ' + articleSelector);
+    console.log(articleSelector);
 
-    /* find the correct article using the selector (value of 'href' attribute) */
+    /* [DONE] find the correct article using the selector (value of 'href' attribute) */
   
-    /* add class 'active' to the correct article */
+    const targetArticle = document.querySelector(articleSelector);
+    console.log(targetArticle);
+
+    /* [DONE] add class 'active' to the correct article */
+
+    targetArticle.classList.add('active');
+
   }
   
   const links = document.querySelectorAll('.titles a');
