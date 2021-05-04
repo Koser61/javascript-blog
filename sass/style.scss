@@ -2,8 +2,10 @@
 
 /* Variables */
 
-$color-light: #fff;
-$color-dark: #444;
+$color-light: #f9f7f7;
+$color-brighter: #dbe2ef;
+$color-bright: #3f72af;
+$color-dark: #112d4e;
 
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
@@ -16,7 +18,9 @@ $font-text: 'Source Sans Pro', sans-serif;
 }
 
 body {
-  background: $color-light;
+  margin: 0;
+  padding: 0;
+  background: $color-brighter;
   font-family: $font-text;
   color: $color-dark;
   font-weight: 300;
@@ -45,7 +49,7 @@ body {
 
 .wrapper {
   display: flex;
-  margin-left: 10px;
+  margin: 8px;
 }
 
 .sidebar {
@@ -54,24 +58,51 @@ body {
 
 .posts {
   flex: 2 0 0;
+  margin: 0 8px;
 }
 
 .sidebar, .posts {
   background: $color-light;
-  margin-right: 10px;
   padding: 40px;
   border: 1px solid $color-dark;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 
-/* Logo */
+/* Header */
 
-.logo {
-  font-family: $font-logo;
-  font-weight: 400;
-  font-size: 104px;
-  line-height: 1;
-  text-align: center;
+header {
+  display: inline-flex;
+  width: 100%;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+  .logo {
+    margin: 0;
+    font-family: $font-logo;
+    font-weight: 400;
+    font-size: 104px;
+    line-height: 1;
+    text-align: center;
+    color: $color-dark;
+    margin-left: 32px;
+  }
+  .hamburger {
+    height: 60px;
+    width: 60px;
+    border: 1px solid $color-dark;
+    border-radius: 12px;
+    background-color: $color-brighter;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+    cursor: pointer;
+    display: none;
+     i {
+       font-size: 30px;
+       color: $color-dark;
+     }
+  }
 }
 
 /* Lists */
@@ -80,7 +111,7 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  .active {
+  &.active {
     font-weight: bold;
   }
 }
@@ -103,6 +134,13 @@ body {
 
 .post {
   display: none;
+  .post-title {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-family: $font-header;
+    font-weight: 600;
+    margin: 16px 0;
+  }
   &.active {
     display: block;
   }
@@ -116,5 +154,21 @@ body {
   display: flex;
   p {
     margin: 0 10px 0 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header {
+    justify-content: space-between;
+    height: 100px;
+    .logo {
+      font-size: 60px;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+  .sidebar {
+    display: none;
   }
 }
