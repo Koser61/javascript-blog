@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Open+Sans:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Open+Sans:wght@300;700&display=swap');
 
 /* Variables */
 
@@ -52,8 +52,7 @@ a {
     color: $color-bright;
   }
   &.active {
-    text-decoration: underline;
-    font-weight: bold;
+    font-weight: 700;
     color: $color-bright;
   }
 }
@@ -123,6 +122,72 @@ header {
   }
 }
 
+/* Mobile Menu */
+
+.mobile-menu {
+  display: flex;
+  margin: 0 16px;
+  flex-direction: column;
+  background-color: $color-brighter;
+  border: 1px solid $color-dark;
+  border-radius: 12px;
+  display: none;
+  .mobile-tags {
+    margin: 8px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+    border-radius: inherit;
+    color: $color-light;
+    a {
+      color: inherit;
+    }
+  }
+  .mobile-nav-item {
+    margin: 8px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+    border-radius: inherit;
+    &.active {
+      background-color: $color-bright;
+    }
+    .section-title {
+      color: $color-light;
+    }
+  }
+  .mobile-list {
+    margin: 8px;
+    border: inherit;
+    border-radius: inherit;
+    background-color: $color-light;
+    display: none;
+    ul {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      li {
+        margin: 0;
+        padding: 8px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid $color-brighter;
+        &:last-of-type { 
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
 /* Lists */
 
 .list, a {
@@ -133,8 +198,7 @@ header {
     color: $color-bright;
   }
   &.active {
-    text-decoration: underline;
-    font-weight: bold;
+    font-weight: 700;
     color: $color-bright;
   }
 }
@@ -151,8 +215,7 @@ header {
       color: $color-bright;
     }
     &.active {
-      text-decoration: underline;
-      font-weight: bold;
+      font-weight: 700;
       color: $color-bright;
     }
   }
