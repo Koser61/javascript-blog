@@ -94,7 +94,7 @@ header {
     margin: 0;
     font-family: $font-logo;
     font-weight: 400;
-    font-size: 104px;
+    font-size: 100px;
     line-height: 1;
     text-align: center;
     color: $color-dark;
@@ -106,15 +106,20 @@ header {
     border: 1px solid $color-dark;
     border-radius: 12px;
     background-color: $color-brighter;
+    color: $color-dark;
     justify-content: center;
     align-items: center;
     margin-right: 30px;
     cursor: pointer;
     display: none;
-     i {
-       font-size: 30px;
-       color: $color-dark;
-     }
+    &.active {
+      color: $color-bright;
+      border: 2px solid $color-bright;
+    }
+    i {
+      font-size: 30px;
+      color: inherit;
+    }
   }
 }
 
