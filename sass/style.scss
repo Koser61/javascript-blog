@@ -45,18 +45,6 @@ body {
   }
 }
 
-a { 
-  text-decoration: none;
-  color: $color-dark;
-  :hover {
-    color: $color-bright;
-  }
-  &.active {
-    font-weight: 700;
-    color: $color-bright;
-  }
-}
-
 /* Layout */
 
 .wrapper {
@@ -94,8 +82,6 @@ header {
     font-family: $font-logo;
     font-weight: 400;
     font-size: 100px;
-    line-height: 1;
-    text-align: center;
     color: $color-dark;
     margin-left: 32px;
   }
@@ -108,98 +94,38 @@ header {
     color: $color-dark;
     justify-content: center;
     align-items: center;
-    margin-right: 30px;
+    margin-right: 28px;
     cursor: pointer;
     display: none;
     &.active {
-      color: $color-bright;
-      border: 2px solid $color-bright;
+      color: $color-light;
+      background-color: $color-dark;
+      border: none;
     }
     i {
       font-size: 30px;
       color: inherit;
-    }
-  }
-}
-
-/* Mobile Menu */
-
-.mobile-menu {
-  display: flex;
-  margin: 0 16px;
-  flex-direction: column;
-  background-color: $color-brighter;
-  border: 1px solid $color-dark;
-  border-radius: 12px;
-  display: none;
-  .mobile-tags {
-    margin: 8px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $color-dark;
-    border-radius: inherit;
-    color: $color-light;
-    a {
-      color: inherit;
-    }
-  }
-  .mobile-nav-item {
-    margin: 8px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $color-dark;
-    border-radius: inherit;
-    &.active {
-      background-color: $color-bright;
-    }
-    .section-title {
-      color: $color-light;
-    }
-  }
-  .mobile-list {
-    margin: 8px;
-    border: inherit;
-    border-radius: inherit;
-    background-color: $color-light;
-    display: none;
-    ul {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      li {
-        margin: 0;
-        padding: 8px 0;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid $color-brighter;
-        &:last-of-type { 
-          border-bottom: none;
-        }
-      }
+      user-select: none;
     }
   }
 }
 
 /* Lists */
 
-.list, a {
+.list {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  :hover {
-    color: $color-bright;
-  }
-  &.active {
-    font-weight: 700;
-    color: $color-bright;
+  a {
+    text-decoration: none;
+    color: $color-dark;
+    :hover {
+      color: $color-bright;
+    }
+    &.active {
+      font-weight: 700;
+      color: $color-bright;
+    }
   }
 }
 
@@ -211,7 +137,7 @@ header {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    :hover {
+    &:hover {
       color: $color-bright;
     }
     &.active {
@@ -258,16 +184,76 @@ header {
 
 @media only screen and (max-width: 768px) {
   header {
-    justify-content: space-between;
+    margin: 8px 0 0 0;
     height: 100px;
+    justify-content: space-between;
     .logo {
-      font-size: 60px;
+      font-size: 72px;
     }
     .hamburger {
       display: flex;
     }
   }
-  .sidebar {
-    display: none;
+  .wrapper {
+    flex-direction: column;
+    .posts {
+      margin: 16px 0;
+      flex: 1;
+      order: 3;
+    }
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      background-color: $color-brighter;
+      &.left { order: 2; }
+      &.right { order: 1; }
+      .section-title {
+        width: 100%;
+        height: 60px;
+        margin: 4px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $color-dark;
+        border-radius: 12px;
+        background-color: $color-dark;
+        color: $color-light;
+        user-select: none;
+        z-index: 1;
+        &.active {
+          border: 1px solid $color-bright;
+          background-color: $color-bright;
+        }
+      }
+      ul {
+        width: 94%;
+        margin: 4px 0;
+        padding-top: 16px;
+        border: 1px solid $color-dark;
+        border-radius: 12px;
+        background-color: $color-light;
+        display: block;//none;
+        transform: translateY(-25px);
+        li {
+          margin: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-bottom: 1px solid $color-brighter;
+          &:last-of-type {
+            border: none;
+          }
+          a {
+            margin: 2px 0;
+          }
+        }
+      }
+    }
   }
 }
