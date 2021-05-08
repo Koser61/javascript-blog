@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Blog</title>
     <script src="https://kit.fontawesome.com/27b932c7ca.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -17,8 +18,8 @@
           </header>
           <main class="wrapper">
             <aside class="sidebar left">
-              <h2 class="section-title">All posts</h2>
-              <ul class="list titles"></ul>
+              <h2 class="section-title" id="all-titles">All posts</h2>
+              <ul class="list titles" id="title-list"></ul>
             </aside>
             <section class="posts">
               <article class="post active" id="article-1">
@@ -207,16 +208,16 @@
               </article>
             </section>
             <aside class="sidebar right">
-              <h2 class="section-title">Tags</h2>
-              <ul class="list tags">
+              <h2 class="section-title" id="all-tags">Tags</h2>
+              <ul class="list tags" id="tag-list">
                 <li><a href="#">design</a> <span>(6)</span></li>
                 <li><a href="#">code</a> <span>(5)</span></li>
                 <li><a href="#">tutorials</a> <span>(4)</span></li>
                 <li><a href="#">reviews</a> <span>(4)</span></li>
                 <li><a href="#">news</a> <span>(6)</span></li>
               </ul>
-              <h2 class="section-title">Authors</h2>
-              <ul class="list authors">
+              <h2 class="section-title" id="all-authors">Authors</h2>
+              <ul class="list authors" id="author-list">
                 <li>
                   <a href="#">
                     <span class="author-name">Kitty Toebean</span>

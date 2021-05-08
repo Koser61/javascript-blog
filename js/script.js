@@ -1,6 +1,9 @@
 'use strict';
 
 const buttonHamburger = document.getElementById('hamburger'),
+  allTags = document.getElementById('all-tags'),
+  allAuthors = document.getElementById('all-authors'),
+  allPosts = document.getElementById('all-titles'),
   optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
@@ -73,8 +76,61 @@ function generateTitleLinks(){
     console.log(titleList);
 } 
 
+function hamburgerClickHandler(){ 
+  if (getComputedStyle(allTags).display === 'none' && getComputedStyle(allAuthors).display === 'none' && getComputedStyle(allPosts).display === 'none') {
+    buttonHamburger.classList.add('active');
+    allTags.style.display = 'flex';
+    allAuthors.style.display = 'flex';
+    allPosts.style.display = 'flex';
+  } else {
+    buttonHamburger.classList.remove('active');
+    allTags.style.display = 'none';
+    allAuthors.style.display = 'none';
+    allPosts.style.display = 'none';
+  }
+}
+function allTagsClickHandler(){
+  const tagList = document.getElementById('tag-list');
+  if (getComputedStyle(tagList).display === 'none') {
+    allTags.classList.add('active');
+    tagList.style.display = 'block';
+  } else {
+    allTags.classList.remove('active');
+    tagList.style.display = 'none';
+  }
+}
+function allAuthorsClickHandler(){
+  const authorList = document.getElementById('author-list');
+  if (getComputedStyle(authorList).display === 'none'){
+    allAuthors.classList.add('active');
+    authorList.style.display = 'block';
+  } else {
+    allAuthors.classList.remove('active');
+    authorList.style.display = 'none';
+  }
+}
+function allPostsClickHandler(){
+  const postList = document.getElementById('title-list');
+  if (getComputedStyle(postList).display === 'none'){
+    allPosts.classList.add('active');
+    postList.style.display = 'block';
+  } else {
+    allPosts.classList.remove('active');
+    postList.style.display = 'none';
+  }
+}
+
 generateTitleLinks();
 
 buttonHamburger.addEventListener('click', function (){
-  
+  hamburgerClickHandler()
+});
+allTags.addEventListener('click', function (){
+  allTagsClickHandler()
+});
+allAuthors.addEventListener('click', function (){
+  allAuthorsClickHandler()
+});
+allPosts.addEventListener('click', function (){
+  allPostsClickHandler()
 });
