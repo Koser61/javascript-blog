@@ -2,11 +2,16 @@
 
 const buttonHamburger = document.getElementById('hamburger'),
   allTags = document.getElementById('all-tags'),
+  tagList = document.getElementById('tag-list'),
   allAuthors = document.getElementById('all-authors'),
+  authorList = document.getElementById('author-list'),
   allPosts = document.getElementById('all-titles'),
+  postList = document.getElementById('title-list'),
   optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
+
+let screenWidth = window.innerWidth;
 
 function titleClickHandler(event){
     event.preventDefault();
@@ -90,7 +95,6 @@ function hamburgerClickHandler(){
   }
 }
 function allTagsClickHandler(){
-  const tagList = document.getElementById('tag-list');
   if (getComputedStyle(tagList).display === 'none') {
     allTags.classList.add('active');
     tagList.style.display = 'block';
@@ -100,7 +104,6 @@ function allTagsClickHandler(){
   }
 }
 function allAuthorsClickHandler(){
-  const authorList = document.getElementById('author-list');
   if (getComputedStyle(authorList).display === 'none'){
     allAuthors.classList.add('active');
     authorList.style.display = 'block';
@@ -110,7 +113,6 @@ function allAuthorsClickHandler(){
   }
 }
 function allPostsClickHandler(){
-  const postList = document.getElementById('title-list');
   if (getComputedStyle(postList).display === 'none'){
     allPosts.classList.add('active');
     postList.style.display = 'block';
@@ -125,12 +127,19 @@ generateTitleLinks();
 buttonHamburger.addEventListener('click', function (){
   hamburgerClickHandler()
 });
-allTags.addEventListener('click', function (){
-  allTagsClickHandler()
-});
-allAuthors.addEventListener('click', function (){
-  allAuthorsClickHandler()
-});
-allPosts.addEventListener('click', function (){
-  allPostsClickHandler()
-});
+
+if (screenWidth <= 768) {
+  allTags.addEventListener('click', function (){
+    allTagsClickHandler()
+  });
+  allAuthors.addEventListener('click', function (){
+    allAuthorsClickHandler()
+  });
+  allPosts.addEventListener('click', function (){
+    allPostsClickHandler()
+  });
+} else {
+  tagList.style.display = 'block';
+  authorList.style.display = 'block';
+  postList.style.display = 'block';
+}

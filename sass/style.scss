@@ -215,7 +215,7 @@ header {
       background-color: $color-brighter;
       &.left { order: 2; }
       &.right { order: 1; }
-      .section-title { // slide from right ?
+      .section-title {
         position: relative;
         width: 100%;
         height: 60px;
@@ -235,7 +235,7 @@ header {
           background-color: $color-bright;
         }
       }
-      ul { // drop down roll out ?
+      ul {
         width: 94%;
         margin: 4px 0;
         padding-top: 16px;
