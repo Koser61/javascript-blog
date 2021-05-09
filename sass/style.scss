@@ -40,6 +40,7 @@ body {
   text-transform: uppercase;
   font-family: $font-header;
   font-weight: 600;
+
   span {
     text-transform: none;
     font-weight: 400;
@@ -79,6 +80,7 @@ header {
   justify-content: center;
   align-items: center;
   margin: 8px 0;
+
   .logo {
     margin: 0;
     font-family: $font-logo;
@@ -87,6 +89,7 @@ header {
     color: $color-dark;
     margin-left: 32px;
   }
+
   .hamburger {
     height: 60px;
     width: 60px;
@@ -99,11 +102,13 @@ header {
     margin-right: 28px;
     cursor: pointer;
     display: none;
+
     &.active {
       color: $color-light;
       background-color: $color-dark;
       border: none;
     }
+
     i {
       font-size: 30px;
       color: inherit;
@@ -118,12 +123,15 @@ header {
   list-style-type: none;
   margin: 0;
   padding: 0;
+
   a {
     text-decoration: none;
     color: $color-dark;
+
     :hover {
       color: $color-bright;
     }
+
     &.active {
       font-weight: 700;
       color: $color-bright;
@@ -135,13 +143,16 @@ header {
   li {
     display: inline-block;
   }
+
   a {
     list-style-type: none;
     margin: 0;
     padding: 0;
+
     &:hover {
       color: $color-bright;
     }
+
     &.active {
       font-weight: 700;
       color: $color-bright;
@@ -161,6 +172,7 @@ header {
 
 .post {
   display: none;
+
   .post-title {
     font-size: 24px;
     text-transform: uppercase;
@@ -168,6 +180,7 @@ header {
     font-weight: 600;
     margin: 16px 0;
   }
+
   &.active {
     display: block;
   }
@@ -179,6 +192,7 @@ header {
 
 .post-tags {
   display: flex;
+
   p {
     margin: 0 10px 0 0;
   }
@@ -189,73 +203,86 @@ header {
     margin: 8px 0 0 0;
     height: 100px;
     justify-content: space-between;
+
     .logo {
       font-size: 72px;
     }
+
     .hamburger {
       display: flex;
     }
   }
+
   .wrapper {
     flex-direction: column;
-    .posts {
-      margin: 16px 0;
-      flex: 1;
-      order: 3;
-    }
-    .sidebar {
-      margin: 0;
-      padding: 0;
-      flex: 1;
+  }
+
+  .posts {
+    margin: 16px 0;
+    flex: 1;
+    order: 3;
+  }
+
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: $color-brighter;
+
+    &.left { order: 2; }
+
+    &.right { order: 1; }
+
+    .section-title {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      margin: 4px 0;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: none;
-      background-color: $color-brighter;
-      &.left { order: 2; }
-      &.right { order: 1; }
-      .section-title {
-        position: relative;
-        width: 100%;
-        height: 60px;
-        margin: 4px 0;
+      border: 1px solid $color-dark;
+      border-radius: 12px;
+      background-color: $color-dark;
+      color: $color-light;
+      user-select: none;
+      z-index: 1;
+      display: none;
+
+      &.active {
+        border: 1px solid $color-bright;
+        background-color: $color-bright;
+      }
+    }
+
+    ul {
+      width: 94%;
+      margin: 4px 0;
+      padding-top: 16px;
+      border: 1px solid $color-dark;
+      border-radius: 12px;
+      background-color: $color-light;
+      transform: translateY(-25px);
+      display: none;
+
+      li {
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid $color-dark;
-        border-radius: 12px;
-        background-color: $color-dark;
-        color: $color-light;
-        user-select: none;
-        z-index: 1;
-        display: none;
-        &.active {
-          border: 1px solid $color-bright;
-          background-color: $color-bright;
+        border-bottom: 1px solid $color-brighter;
+
+        &:last-of-type {
+          border: none;
         }
-      }
-      ul {
-        width: 94%;
-        margin: 4px 0;
-        padding-top: 16px;
-        border: 1px solid $color-dark;
-        border-radius: 12px;
-        background-color: $color-light;
-        transform: translateY(-25px);
-        display: none;
-        li {
-          margin: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-bottom: 1px solid $color-brighter;
-          &:last-of-type {
-            border: none;
-          }
-          a {
-            margin: 2px 0;
-          }
+
+        a {
+          margin: 2px 0;
         }
       }
     }
