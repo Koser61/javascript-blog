@@ -9,7 +9,8 @@ const buttonHamburger = document.getElementById('hamburger'),
   postList = document.getElementById('title-list'),
   optArticleSelector = '.post',
   optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list';
 
 let screenWidth = window.innerWidth;
 
@@ -74,14 +75,47 @@ function generateTitleLinks(){
 
   titleList.innerHTML = html;
   const links = document.querySelectorAll('.titles a');
-  
+
   for(let link of links){
     link.addEventListener('click', titleClickHandler);
   }
   console.log(titleList);
-} 
+}
+function generateTags(){
+  /* [DONE] find all articles */
+  const articles = document.querySelectorAll(optArticleSelector);
+  console.log(articles);
+  /* [DONE] START LOOP: for every article: */
+  for(let article of articles){
+    /* [DONE] find tags wrapper */
+    const articleTagList = article.querySelector(optArticleTagsSelector);
+    console.log(articleTagList);
+    /* [DONE] make html variable with empty string */
+    let html = '';
+    /* [DONE] get tags from data-tags attribute */
+    const articleTags = article.getAttribute('data-tags');
+    console.log(articleTags);
+    /* [DONE] split tags into array */
+    const articleTagsArray = articleTags.split(' ');
+    console.log(articleTagsArray);
+    /* [DONE] START LOOP: for each tag */
+    for(let tag of articleTagsArray){
+      console.log(tag);
+      /* [DONE] generate HTML of the link */
+      const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+      console.log(linkHTML);
+      /* [DONE] add generated code to html variable */
+      html = html + linkHTML;
+      console.log(html);
+    /* [DONE] END LOOP: for each tag */
+    }
+    /* [DONE] insert HTML of all the links into the tags wrapper */
+    articleTagList.innerHTML = html;
+  /* [DONE] END LOOP: for every article: */
+  }
+}
 
-function hamburgerClickHandler(){ 
+function hamburgerClickHandler(){
   if (getComputedStyle(allTags).display === 'none' && getComputedStyle(allAuthors).display === 'none' && getComputedStyle(allPosts).display === 'none') {
     buttonHamburger.classList.add('active');
     allTags.style.display = 'flex';
@@ -123,6 +157,7 @@ function allPostsClickHandler(){
 }
 
 generateTitleLinks();
+generateTags();
 
 buttonHamburger.addEventListener('click', function (){
   hamburgerClickHandler();

@@ -148,6 +148,7 @@ header {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-right: 6px;
 
     &:hover {
       color: $color-bright;
@@ -191,10 +192,8 @@ header {
 }
 
 .post-tags {
-  display: flex;
-
   p {
-    margin: 0 10px 0 0;
+    margin-bottom: 6px;
   }
 }
 
