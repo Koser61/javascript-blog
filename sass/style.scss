@@ -189,6 +189,20 @@ header {
 
 .post-author {
   font-style: italic;
+
+  a {
+    text-decoration: none;
+    color: $color-dark;
+
+    :hover {
+      color: $color-bright;
+    }
+
+    &.active {
+      font-weight: 700;
+      color: $color-bright;
+    }
+  }
 }
 
 .post-tags {
