@@ -14,7 +14,8 @@ const buttonHamburger = document.getElementById('hamburger'),
   optArticleAuthorSelector = '.post-author',
   optTagsListSelector = '.tags.list',
   optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-';
+  optCloudClassPrefix = 'tag-size-',
+  optAuthorsListSelector = '.authors.list';
 
 let screenWidth = window.innerWidth;
 
@@ -161,7 +162,7 @@ function generateTags(){
   /* [DONE] END LOOP: for every article: */
   }
   /* [NEW] find list of tags in right column */
-  const tagList = document.querySelector('.tags');
+  const tagList = document.querySelector(optTagsListSelector);
 
   /* [NEW] execute calculateTagsParams function with allTags as argument */
   const tagsParams = calculateTagsParams(allTags);
@@ -259,7 +260,7 @@ function generateAuthors(){
     /* [DONE] make html variable with empty string */
     let html = '';
 
-    /* [DONE] get tags from data-author attribute */
+    /* [DONE] get author name from data-author attribute */
     const articleAuthorName = article.getAttribute('data-author');
     console.log(articleAuthorName);
 
