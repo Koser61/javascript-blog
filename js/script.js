@@ -1,17 +1,20 @@
 'use strict';
 
 const buttonHamburger = document.getElementById('hamburger'),
-  allTags = document.getElementById('all-tags'),
+  divAllTags = document.getElementById('all-tags'),
   tagList = document.getElementById('tag-list'),
-  allAuthors = document.getElementById('all-authors'),
+  divAllAuthors = document.getElementById('all-authors'),
   authorList = document.getElementById('author-list'),
-  allPosts = document.getElementById('all-titles'),
+  divAllPosts = document.getElementById('all-titles'),
   postList = document.getElementById('title-list'),
   optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post-author';
+  optArticleAuthorSelector = '.post-author',
+  optTagsListSelector = '.tags.list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
 
 let screenWidth = window.innerWidth;
 
@@ -83,7 +86,30 @@ function generateTitleLinks(customSelector = ''){
   }
   console.log(titleList);
 }
+function calculateTagsParams(argAllTags){
+  const params = {max: 0, min: 999999};
+
+  for(let argTag in argAllTags){
+    params.max = argAllTags[argTag] > params.max ? argAllTags[argTag] : params.max;
+    params.min = argAllTags[argTag] < params.min ? argAllTags[argTag] : params.min;
+
+    console.log(argTag + ' is used ' + argAllTags[argTag] + ' times');
+  }
+
+  return params;
+}
+function calculateTagClass(count, params){
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+  const tagClass = optCloudClassPrefix + classNumber;
+  return tagClass;
+}
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+
   /* [DONE] find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   console.log(articles);
@@ -118,6 +144,15 @@ function generateTags(){
       html = html + linkHTML;
       console.log(html);
 
+      /* [NEW] check if this link is NOT already in allTags */
+      if(!allTags.hasOwnProperty(tag)){
+
+        /* [NEW] add tag to allTags object */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+      }
+
     /* [DONE] END LOOP: for each tag */
     }
     /* [DONE] insert HTML of all the links into the tags wrapper */
@@ -125,6 +160,28 @@ function generateTags(){
 
   /* [DONE] END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+
+  /* [NEW] execute calculateTagsParams function with allTags as argument */
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams);
+
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    const tagLinkHTML = '<li><a href="#tag-' + tag + '"' + ' class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>';
+    console.log('tagLinkHTML:', tagLinkHTML);
+
+    allTagsHTML += tagLinkHTML;
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
+
+  /* [NEW] add html from allTagsHTML to tagList */
+  tagList.innerHTML = allTagsHTML;
 }
 function tagClickHandler(event){
   /* [DONE] prevent default action for this event */
@@ -280,44 +337,51 @@ function addClickListenersToAuthors(){
   /* [DONE] END LOOP: for each link */
   }
 }
-
+/*
+Author list HTML structure:
+  <li>
+    <a href="#author-'name'">
+      <span class="author-name">'name'</span>
+    </a>
+  </li>
+*/
 function hamburgerClickHandler(){
-  if (getComputedStyle(allTags).display === 'none' && getComputedStyle(allAuthors).display === 'none' && getComputedStyle(allPosts).display === 'none') {
+  if (getComputedStyle(divAllTags).display === 'none' && getComputedStyle(divAllAuthors).display === 'none' && getComputedStyle(divAllPosts).display === 'none') {
     buttonHamburger.classList.add('active');
-    allTags.style.display = 'flex';
-    allAuthors.style.display = 'flex';
-    allPosts.style.display = 'flex';
+    divAllTags.style.display = 'flex';
+    divAllAuthors.style.display = 'flex';
+    divAllPosts.style.display = 'flex';
   } else {
     buttonHamburger.classList.remove('active');
-    allTags.style.display = 'none';
-    allAuthors.style.display = 'none';
-    allPosts.style.display = 'none';
+    divAllTags.style.display = 'none';
+    divAllAuthors.style.display = 'none';
+    divAllPosts.style.display = 'none';
   }
 }
 function allTagsClickHandler(){
   if (getComputedStyle(tagList).display === 'none') {
-    allTags.classList.add('active');
-    tagList.style.display = 'block';
+    divAllTags.classList.add('active');
+    tagList.style.display = 'inline-block';
   } else {
-    allTags.classList.remove('active');
+    divAllTags.classList.remove('active');
     tagList.style.display = 'none';
   }
 }
 function allAuthorsClickHandler(){
   if (getComputedStyle(authorList).display === 'none'){
-    allAuthors.classList.add('active');
+    divAllAuthors.classList.add('active');
     authorList.style.display = 'block';
   } else {
-    allAuthors.classList.remove('active');
+    divAllAuthors.classList.remove('active');
     authorList.style.display = 'none';
   }
 }
 function allPostsClickHandler(){
   if (getComputedStyle(postList).display === 'none'){
-    allPosts.classList.add('active');
+    divAllPosts.classList.add('active');
     postList.style.display = 'block';
   } else {
-    allPosts.classList.remove('active');
+    divAllPosts.classList.remove('active');
     postList.style.display = 'none';
   }
 }
@@ -333,17 +397,16 @@ buttonHamburger.addEventListener('click', function (){
 });
 
 if (screenWidth <= 768) {
-  allTags.addEventListener('click', function (){
+  divAllTags.addEventListener('click', function (){
     allTagsClickHandler();
   });
-  allAuthors.addEventListener('click', function (){
+  divAllAuthors.addEventListener('click', function (){
     allAuthorsClickHandler();
   });
-  allPosts.addEventListener('click', function (){
+  divAllPosts.addEventListener('click', function (){
     allPostsClickHandler();
   });
 } else {
-  tagList.style.display = 'block';
   authorList.style.display = 'block';
   postList.style.display = 'block';
 }

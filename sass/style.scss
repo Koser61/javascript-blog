@@ -161,6 +161,40 @@ header {
   }
 }
 
+/* Tag cloud */
+
+.list.tags {
+  display: inline-block;
+  margin-bottom: 24px;
+
+  li {
+    display: inline-flex;
+    font-size: 34px;
+    text-transform: uppercase;
+    margin-right: 6px;
+
+    .tag-size-1 {
+      font-size: 40%;
+    }
+
+    .tag-size-2 {
+      font-size: 50%;
+    }
+
+    .tag-size-3 {
+      font-size: 60%;
+    }
+
+    .tag-size-4 {
+      font-size: 80%;
+    }
+
+    .tag-size-5 {
+      font-size: 100%;
+    }
+  }
+}
+
 /* Authors */
 
 .authors {
@@ -297,6 +331,21 @@ header {
         a {
           margin: 2px 0;
         }
+      }
+    }
+
+    .list.tags {
+      margin: 0;
+      padding: 24px 12px 8px 12px;
+      display: none;
+      text-align: center;
+
+      li {
+        display: inline-flex;
+        font-size: 36px;
+        text-transform: uppercase;
+        margin-right: 8px;
+        border-bottom: none;
       }
     }
   }
