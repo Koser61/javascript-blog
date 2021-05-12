@@ -245,7 +245,22 @@ function addClickListenersToTags(){
   /* [DONE] END LOOP: for each link */
   }
 }
+function calculateAuthorParams(argAllAuthors){
+  const params = {max: 0, min: 999999};
+
+  for(let argAuthor in argAllAuthors){
+    params.max = argAllAuthors[argAuthor] > params.max ? argAllAuthors[argAuthor] : params.max;
+    params.min = argAllAuthors[argAuthor] < params.min ? argAllAuthors[argAuthor] : params.min;
+
+    console.log(argAuthor + ' is used ' + argAllAuthors[argAuthor] + ' times');
+  }
+
+  return params;
+}
 function generateAuthors(){
+  /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
+
   /* [DONE] find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   console.log(articles);
@@ -265,18 +280,50 @@ function generateAuthors(){
     console.log(articleAuthorName);
 
     /* [DONE] generate HTML of the link */
-    const linkHTML = 'by ' + '<a href="#author-' + articleAuthorName + '">' + articleAuthorName + '</a>';
+    const linkHTML = '<a href="#author-' + articleAuthorName + '">' + articleAuthorName + '</a>';
     console.log(linkHTML);
 
     /* [DONE] add generated code to html variable */
     html = html + linkHTML;
     console.log(html);
 
-    /* [DONE] insert HTML of all the links into the author wrapper */
-    articleAuthor.innerHTML = html;
+    /* [DONE] insert HTML of the link into the author wrapper */
+    articleAuthor.innerHTML = 'by ' + html;
+
+    /* [NEW] check if this link is NOT already in allAuthors */
+    if(!allAuthors.hasOwnProperty(articleAuthorName)){
+
+      /* [NEW] add tag to allAuthors object */
+      allAuthors[articleAuthorName] = 1;
+    } else {
+      allAuthors[articleAuthorName]++;
+    }
 
   /* [DONE] END LOOP: for every article: */
   }
+
+  /* [NEW] find list of authors in right column */
+  const authorList = document.querySelector(optAuthorsListSelector);
+
+  /* [NEW] execute calculateAuthorParams function with allAuthors as argument */
+  const authorParams = calculateTagsParams(allAuthors);
+  console.log('authorParams:', authorParams);
+
+  /* [NEW] create variable for all links HTML code */
+  let allAuthorsHTML = '';
+
+  /* [NEW] START LOOP: for each author in allAuthors: */
+  for(let author in allAuthors){
+    /* [NEW] generate code of a link and add it to allAuthorsHTML */
+    const authorLinkHTML = '<li><a href="#author-' + author + '">' + author + ' (' + allAuthors[author] + ')' + '</a></li>';
+    console.log('authorLinkHTML:', authorLinkHTML);
+
+    allAuthorsHTML += authorLinkHTML;
+  }
+  /* [NEW] END LOOP: for each tag in allAuthors: */
+
+  /* [NEW] add html from allAuthorsHTML to authorList */
+  authorList.innerHTML = allAuthorsHTML;
 }
 function authorClickHandler(event){
   /* [DONE] prevent default action for this event */
@@ -338,14 +385,7 @@ function addClickListenersToAuthors(){
   /* [DONE] END LOOP: for each link */
   }
 }
-/*
-Author list HTML structure:
-  <li>
-    <a href="#author-'name'">
-      <span class="author-name">'name'</span>
-    </a>
-  </li>
-*/
+
 function hamburgerClickHandler(){
   if (getComputedStyle(divAllTags).display === 'none' && getComputedStyle(divAllAuthors).display === 'none' && getComputedStyle(divAllPosts).display === 'none') {
     buttonHamburger.classList.add('active');
