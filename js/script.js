@@ -31,8 +31,6 @@ const buttonHamburger = document.getElementById('hamburger'),
   divAllPosts = document.getElementById('all-titles'),
   postList = document.getElementById('title-list');
 
-let screenWidth = window.innerWidth;
-
 function titleClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
@@ -322,6 +320,10 @@ function addClickListenersToAuthors(){
 }
 
 function hamburgerClickHandler(){
+  if (window.innerWidth > 768){
+    console.log(window.innerWidth);
+    return;
+  }
   if (getComputedStyle(divAllTags).display === 'none' && getComputedStyle(divAllAuthors).display === 'none' && getComputedStyle(divAllPosts).display === 'none') {
     buttonHamburger.classList.add('active');
     divAllTags.style.display = 'flex';
@@ -335,6 +337,10 @@ function hamburgerClickHandler(){
   }
 }
 function allTagsClickHandler(){
+  if (window.innerWidth > 768){
+    console.log(window.innerWidth);
+    return;
+  }
   if (getComputedStyle(tagList).display === 'none') {
     divAllTags.classList.add('active');
     tagList.style.display = 'inline-block';
@@ -344,6 +350,10 @@ function allTagsClickHandler(){
   }
 }
 function allAuthorsClickHandler(){
+  if (window.innerWidth > 768){
+    console.log(window.innerWidth);
+    return;
+  }
   if (getComputedStyle(authorList).display === 'none'){
     divAllAuthors.classList.add('active');
     authorList.style.display = 'block';
@@ -353,6 +363,10 @@ function allAuthorsClickHandler(){
   }
 }
 function allPostsClickHandler(){
+  if (window.innerWidth > 768){
+    console.log(window.innerWidth);
+    return;
+  }
   if (getComputedStyle(postList).display === 'none'){
     divAllPosts.classList.add('active');
     postList.style.display = 'block';
@@ -371,18 +385,14 @@ addClickListenersToAuthors();
 buttonHamburger.addEventListener('click', function (){
   hamburgerClickHandler();
 });
+divAllTags.addEventListener('click', function (){
+  allTagsClickHandler();
+});
+divAllAuthors.addEventListener('click', function (){
+  allAuthorsClickHandler();
+});
+divAllPosts.addEventListener('click', function (){
+  allPostsClickHandler();
+});
 
-if (screenWidth <= 768) {
-  divAllTags.addEventListener('click', function (){
-    allTagsClickHandler();
-  });
-  divAllAuthors.addEventListener('click', function (){
-    allAuthorsClickHandler();
-  });
-  divAllPosts.addEventListener('click', function (){
-    allPostsClickHandler();
-  });
-} else {
-  authorList.style.display = 'block';
-  postList.style.display = 'block';
-}
+
