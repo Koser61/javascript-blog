@@ -83,14 +83,14 @@ function generateTitleLinks(customSelector = ''){
   }
   console.log(titleList);
 }
-function calculateTagsParams(argAllTags){
+function calculateParams(argAllLinks){
   const params = {max: 0, min: 999999};
 
-  for(let argTag in argAllTags){
-    params.max = argAllTags[argTag] > params.max ? argAllTags[argTag] : params.max;
-    params.min = argAllTags[argTag] < params.min ? argAllTags[argTag] : params.min;
+  for(let argLink in argAllLinks){
+    params.max = argAllLinks[argLink] > params.max ? argAllLinks[argLink] : params.max;
+    params.min = argAllLinks[argLink] < params.min ? argAllLinks[argLink] : params.min;
 
-    console.log(argTag + ' is used ' + argAllTags[argTag] + ' times');
+    console.log(argLink + ' is used ' + argAllLinks[argLink] + ' times');
   }
 
   return params;
@@ -129,10 +129,10 @@ function generateTags(){
       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
       console.log(linkHTML);
       /* [DONE] add generated code to html variable */
-      html = html + linkHTML;
+      html += linkHTML;
       console.log(html);
       /* [NEW] check if this link is NOT already in allTags */
-      if(!allTags.hasOwnProperty(tag)){
+      if(!Object.prototype.hasOwnProperty.call(allTags, tag)){
         /* [NEW] add tag to allTags object */
         allTags[tag] = 1;
       } else {
@@ -146,8 +146,8 @@ function generateTags(){
   }
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(opt.tagsListSelector);
-  /* [NEW] execute calculateTagsParams function with allTags as argument */
-  const tagsParams = calculateTagsParams(allTags);
+  /* [NEW] execute calculateParams function with allTags as argument */
+  const tagsParams = calculateParams(allTags);
   console.log('tagsParams:', tagsParams);
   /* [NEW] create variable for all links HTML code */
   let allTagsHTML = '';
@@ -209,18 +209,6 @@ function addClickListenersToTags(){
   /* [DONE] END LOOP: for each link */
   }
 }
-function calculateAuthorParams(argAllAuthors){
-  const params = {max: 0, min: 999999};
-
-  for(let argAuthor in argAllAuthors){
-    params.max = argAllAuthors[argAuthor] > params.max ? argAllAuthors[argAuthor] : params.max;
-    params.min = argAllAuthors[argAuthor] < params.min ? argAllAuthors[argAuthor] : params.min;
-
-    console.log(argAuthor + ' is used ' + argAllAuthors[argAuthor] + ' times');
-  }
-
-  return params;
-}
 function generateAuthors(){
   /* [NEW] create a new variable allAuthors with an empty object */
   let allAuthors = {};
@@ -246,7 +234,7 @@ function generateAuthors(){
     /* [DONE] insert HTML of the link into the author wrapper */
     articleAuthor.innerHTML = 'by ' + html;
     /* [NEW] check if this link is NOT already in allAuthors */
-    if(!allAuthors.hasOwnProperty(articleAuthorName)){
+    if(!Object.prototype.hasOwnProperty.call(allAuthors, articleAuthorName)){
       /* [NEW] add tag to allAuthors object */
       allAuthors[articleAuthorName] = 1;
     } else {
@@ -257,7 +245,7 @@ function generateAuthors(){
   /* [NEW] find list of authors in right column */
   const authorList = document.querySelector(opt.authorsListSelector);
   /* [NEW] execute calculateAuthorParams function with allAuthors as argument */
-  const authorParams = calculateTagsParams(allAuthors);
+  const authorParams = calculateParams(allAuthors);
   console.log('authorParams:', authorParams);
   /* [NEW] create variable for all links HTML code */
   let allAuthorsHTML = '';
